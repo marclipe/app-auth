@@ -6,7 +6,7 @@ import React from "react";
 import Image from "next/image";
 
 export default function SignupPage() {
-  const route = useRouter();
+  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
   const [user, setUser] = React.useState({
     email: "",
@@ -16,14 +16,26 @@ export default function SignupPage() {
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("api/users/login", user);
-      route.push("/");
+      const response = await axios.post("/api/users/login", {
+        email: user.email,
+        password: user.password,
+      });
+      router.push("/");
     } catch (error: any) {
-      console.log("Login failed", error.message);
+      console.log("Login failed", error.response?.data || error.message);
     } finally {
       setLoading(false);
     }
   };
+
+  const logout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      router.push('/login');
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
 
   return (
     <section className="flex flex-col md:flex-row min-h-screen">

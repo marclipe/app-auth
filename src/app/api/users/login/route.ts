@@ -4,10 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-connect(); 
+// connect(); 
 
 export async function POST(request: NextRequest) {
   try {
+    await connect();
     const reqBody = await request.json();
     const { email, password } = reqBody;
 
@@ -33,8 +34,8 @@ export async function POST(request: NextRequest) {
     // information. In this case, it includes the user's unique identifier (id),
     // username, and email.
     const tokenData = {
-      id: user.id,
-      user: user.username,
+      id: user._id,
+      username: user.username,
       email: user.email,
     };
 
@@ -53,6 +54,24 @@ export async function POST(request: NextRequest) {
     response.cookies.set("token", token, {
       httpOnly: true,
     })
+
+    return response;
+  } catch (error: any) {
+    return NextResponse.json({error: error.message}, {status: 500});
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const response = NextResponse.json(
+      {
+        message: "Logout successful",
+        success: true,
+      }
+    )
+    response.cookies.set("token", "", 
+      {httpOnly: true, expires: new Date(0)}
+    )
 
     return response;
   } catch (error: any) {
