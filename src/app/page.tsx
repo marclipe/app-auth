@@ -8,9 +8,9 @@ export default function Home() {
 
   return (
     <div className="mx-auto flex justify-center content-center h-auto">
-      <h3>What you wating for?</h3>
+      {/* <h3>What you wating for?</h3> */}
       <Link href="/signup">Signup</Link>
-      <ProfilePage/>
+      <ProfilePage />
     </div>
   );
 }

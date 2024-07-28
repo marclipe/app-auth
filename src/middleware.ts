@@ -5,10 +5,14 @@ export function middleware(request: NextRequest) {
 
   // Define paths that are considered public (accessible without a token)
   const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail'; 
-  const isPrivatePath = path === '/' || path === 'profile';
+  const isPrivatePath = path === '/' || path === '/profile';
 
   //Get tokens of from the cookies
   const token = request.cookies.get('token')?.value || ''; 
+
+  if (path === "/api/users/logout") {
+    return NextResponse.next();
+  }
 
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL('/', request.nextUrl)); 

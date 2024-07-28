@@ -28,15 +28,6 @@ export default function SignupPage() {
     }
   };
 
-  const logout = async () => {
-    try {
-      await axios.get("/api/users/logout");
-      router.push('/login');
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  }
-
   return (
     <section className="flex flex-col md:flex-row min-h-screen">
       <div className="hidden md:block md:w-1/2 items-center justify-center bg-neutral-200 fixed right-0 top-0 bottom-0">
