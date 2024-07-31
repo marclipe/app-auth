@@ -16,18 +16,18 @@ export async function POST(request: NextRequest) {
     if (user) {
       return NextResponse.json(
         { error: "User already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     //hash password using bcryptjs.
     const salt = await bcryptjs.genSalt(10);
-    const hashedPassword = await bcryptjs.hash(password, salt); 
+    const hashedPassword = await bcryptjs.hash(password, salt);
     const newUser = new User({
-      username, 
+      username,
       email,
-      password: hashedPassword
-    })
+      password: hashedPassword,
+    });
 
     //To save new users in database
     const savedUser = await newUser.save();
@@ -37,11 +37,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       message: "User created successfully",
-      success: true, 
-      savedUser
+      success: true,
+      savedUser,
     });
-
   } catch (error: any) {
-    return NextResponse.json({error: error.message}, {status: 500}); 
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

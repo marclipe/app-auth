@@ -6,13 +6,17 @@ import { useState } from "react";
 export default function ProfilePage() {
   const router = useRouter();
 
-  const [data, setData] = useState<{_id: string, username: string, email: string} | null>(null);
+  const [data, setData] = useState<{
+    _id: string;
+    username: string;
+    email: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const getUserDetails = async () => {
     try {
-     const response = await axios.get("/api/users/me");
-     setData(response.data.data); 
+      const response = await axios.get("/api/users/me");
+      setData(response.data.data);
     } catch (err) {
       console.error(err);
       setError("Failed to fetch user details");
@@ -32,7 +36,9 @@ export default function ProfilePage() {
   return (
     <div className="bg-indigo-950 min-h-96 flex flex-col items-center justify-center rounded-lg p-8">
       <div>
-        <h1 className="text-white text-3xl text-center pb-4">{data?.username}</h1>
+        <h1 className="text-white text-3xl text-center pb-4">
+          {data?.username}
+        </h1>
         {data ? (
           <div>
             <p>ID: {data._id}</p>

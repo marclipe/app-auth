@@ -19,17 +19,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Update user properties and save the changes
-    user.isVerified = true; 
-    user.verifyToken = undefined; 
+    user.isVerified = true;
+    user.verifyToken = undefined;
     user.verifyTokenExpiry = undefined;
-    await user.save(); 
+    await user.save();
 
     return NextResponse.json({
       message: "Email Verified successfully",
-      success: true
+      success: true,
     });
-
   } catch (error: any) {
-    return NextResponse.json({error: error.message}, {status: 500})
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

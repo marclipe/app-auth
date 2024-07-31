@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// connect(); 
+// connect();
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json(
         { error: "User does not exist" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     if (!validPassword) {
       return NextResponse.json(
         { error: "Invalid password!!!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -53,28 +53,24 @@ export async function POST(request: NextRequest) {
     // Set the token as an HTTP-only cookie
     response.cookies.set("token", token, {
       httpOnly: true,
-    })
+    });
 
     return response;
   } catch (error: any) {
-    return NextResponse.json({error: error.message}, {status: 500});
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
-    const response = NextResponse.json(
-      {
-        message: "Logout successful",
-        success: true,
-      }
-    )
-    response.cookies.set("token", "", 
-      {httpOnly: true, expires: new Date(0)}
-    )
+    const response = NextResponse.json({
+      message: "Logout successful",
+      success: true,
+    });
+    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
 
     return response;
   } catch (error: any) {
-    return NextResponse.json({error: error.message}, {status: 500});
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

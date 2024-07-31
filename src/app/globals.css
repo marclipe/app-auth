@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-blue-600 text-white; 
+    @apply bg-blue-600 text-white;
   }
 
   h1 {
