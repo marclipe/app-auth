@@ -36,9 +36,9 @@ export default function ProfilePage() {
   return (
     <div className="bg-indigo-950 min-h-96 flex flex-col items-center justify-center rounded-lg p-8">
       <div>
-        <h1 className="text-white text-3xl text-center pb-4">
+        <h3 className="text-white text-3xl text-center pb-4">
           {data?.username}
-        </h1>
+        </h3>
         {data ? (
           <div>
             <p>ID: {data._id}</p>
