@@ -5,7 +5,7 @@ User authentication with Next.js following monolithic architecture.
 
 ![Logo](https://raw.githubusercontent.com/marclipe/app-auth/main/src/app/favicon.ico)
 
-Deploy on Vercel [MarcBlog](https://appflix-eight.vercel.app/)
+Deploy on Vercel [UserAuth](https://appflix-eight.vercel.app/)
 
 ## Tech Stack
 
